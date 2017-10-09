@@ -1,0 +1,14 @@
+uuid: e9898e89-0bbf-4a6f-bea5-fd735bc940c4
+name: 'Research Portal'
+mail: bhavnasharma2996@gmail.com
+slogan: ''
+page:
+  403: ''
+  404: ''
+  front: /node
+admin_compact_mode: false
+weight_select_max: 100
+langcode: en
+default_langcode: en
+_core:
+  default_config_hash: AyT9s8OUcclfALRE_imByOMgtZ19eOlqdF6zI3p7yqo

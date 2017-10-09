@@ -1,0 +1,14 @@
+uuid: 3b4ab426-a0fb-4de8-bb1a-198d7589ae80
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: vymHlgJy26BuI5GGj9-IXjwR3dRC5C0tij4BpWJnoqw
+id: feedback
+label: 'Website feedback'
+recipients:
+  - bhavnasharma2996@gmail.com
+reply: ''
+weight: 0
+message: 'Your message has been sent.'
+redirect: ''

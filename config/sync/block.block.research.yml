@@ -1,0 +1,31 @@
+uuid: 55e2c663-31ac-458a-b216-50b2473576a7
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:55bc1c86-810e-4d47-9b39-ed23531ae945'
+  module:
+    - block_content
+    - system
+  theme:
+    - bootstrap
+id: research
+theme: bootstrap
+region: sidebar_first
+weight: 0
+provider: null
+plugin: 'block_content:55bc1c86-810e-4d47-9b39-ed23531ae945'
+settings:
+  id: 'block_content:55bc1c86-810e-4d47-9b39-ed23531ae945'
+  label: 'Research '
+  provider: block_content
+  label_display: visible
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }

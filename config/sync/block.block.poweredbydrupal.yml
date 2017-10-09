@@ -1,0 +1,20 @@
+uuid: 369fbda7-15bf-465d-9161-fe768b097fcb
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - bootstrap
+id: poweredbydrupal
+theme: bootstrap
+region: footer
+weight: -6
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  provider: system
+  label_display: '0'
+visibility: {  }

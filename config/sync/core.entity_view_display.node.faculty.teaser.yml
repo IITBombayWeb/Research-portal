@@ -1,0 +1,18 @@
+uuid: 822e6cc6-24ba-4fcc-9bfe-19d16e21e1a4
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - node.type.faculty
+  module:
+    - user
+id: node.faculty.teaser
+targetEntityType: node
+bundle: faculty
+mode: teaser
+content:
+  links:
+    weight: 100
+    region: content
+hidden: {  }

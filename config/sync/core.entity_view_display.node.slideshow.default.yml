@@ -1,0 +1,28 @@
+uuid: 67b7eff5-a698-4ddd-92b9-50c24cf61b2c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.slideshow.field_image1
+    - node.type.slideshow
+  module:
+    - image
+    - user
+id: node.slideshow.default
+targetEntityType: node
+bundle: slideshow
+mode: default
+content:
+  field_image1:
+    weight: 101
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden: {  }

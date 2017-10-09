@@ -1,0 +1,25 @@
+uuid: d935836c-4515-4e30-8634-b311c1fc380e
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:1fb95b9e-7c9c-4d2f-b725-31f9a69d64b3'
+  module:
+    - block_content
+  theme:
+    - bootstrap
+id: otherinformation
+theme: bootstrap
+region: footer
+weight: 0
+provider: null
+plugin: 'block_content:1fb95b9e-7c9c-4d2f-b725-31f9a69d64b3'
+settings:
+  id: 'block_content:1fb95b9e-7c9c-4d2f-b725-31f9a69d64b3'
+  label: 'Other Information'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

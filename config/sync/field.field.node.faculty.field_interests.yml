@@ -1,0 +1,21 @@
+uuid: ef426c79-5377-4350-ae61-e5e25cc0c7e5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_interests
+    - node.type.faculty
+  module:
+    - text
+id: node.faculty.field_interests
+field_name: field_interests
+entity_type: node
+bundle: faculty
+label: Interests
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

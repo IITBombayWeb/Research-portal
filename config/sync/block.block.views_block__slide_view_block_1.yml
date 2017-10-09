@@ -1,0 +1,30 @@
+uuid: 0299e0f5-cdf8-4a7f-9e5e-5202f0bc3f99
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.slide_view
+  module:
+    - system
+    - views
+  theme:
+    - bootstrap
+id: views_block__slide_view_block_1
+theme: bootstrap
+region: header
+weight: 0
+provider: null
+plugin: 'views_block:slide_view-block_1'
+settings:
+  id: 'views_block:slide_view-block_1'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }
