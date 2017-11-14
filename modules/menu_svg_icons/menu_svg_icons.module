@@ -1,0 +1,161 @@
+<?php
+
+/**
+ * @file
+ * Module file for menu_svg_icons.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\menu_svg_icons\Entity\IconSetMenu;
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function menu_svg_icons_form_menu_edit_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+  $menu = \Drupal::routeMatch()->getParameter('menu');
+  if ($menu->get('id') != 'admin') {
+    $options = [
+      'no_icon_set' => t('No icon set for this menu'),
+    ];
+
+    $entity_manager = \Drupal::entityTypeManager();
+    $icon_sets = $entity_manager->getStorage('menu_svg_icons_icon_set')->loadMultiple();
+    foreach ($icon_sets as $entity_key => $entity) {
+      $options[$entity_key] = $entity->label;
+    }
+
+    $menu = $form_state->getFormObject()->getEntity();
+    $menu_name = $menu->get('id');
+    $icon_menu_elm = \Drupal::config('menu_svg_icons.icon_set_menu.' . $menu_name);
+    $form['menu_svg_icons_icon_set'] = [
+      '#type' => 'select',
+      '#title' => t('Icon set for this menu'),
+      '#weight' => '0',
+      '#options' => $options,
+      '#default_value' => isset($icon_menu_elm) ? $icon_menu_elm->get('icon_set') : '',
+    ];
+
+    $form['actions']['submit']['#submit'][] = '_menu_svg_icons_menu_edit_form_submit';
+  }
+}
+
+/**
+ * Submit function for menu edit form.
+ */
+function _menu_svg_icons_menu_edit_form_submit($form, FormStateInterface $form_state) {
+  $menu = $form_state->getFormObject()->getEntity();
+  $menu_name = $menu->get('id');
+  $icon_set = $menu->get('menu_svg_icons_icon_set');
+
+  $icon_menu_elm = new IconSetMenu(['id' => $menu_name, 'icon_set' => $icon_set], 'menu_svg_icons_icon_set_menu');
+  $icon_menu_elm->save();
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function menu_svg_icons_form_menu_link_content_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+  $menu_link = $form_state->getFormObject()->getEntity();
+  $menu_name = $menu_link->menu_name->value;
+
+  if ($icon_set_menu = \Drupal::config('menu_svg_icons.icon_set_menu.' . $menu_name)) {
+    if ($icon_set = \Drupal::config('menu_svg_icons.icon_set.' . $icon_set_menu->get('icon_set'))) {
+      $menu_link_options = $menu_link->link->first()->options ?: [];
+      $menu_link_icon = isset($menu_link_options['icon']) ? $menu_link_options['icon'] : 'no_icon';
+
+      $xml = simplexml_load_string($icon_set->get('source'));
+      $symbols = $xml->defs->symbol;
+
+      $options = [
+        'no_icon' => t('No icon'),
+      ];
+      foreach ($symbols as $symbol) {
+        if (is_object($symbol)) {
+          $id = (string) $symbol['id'];
+          $options[$id] = $id;
+        }
+      }
+      $form['options']['icon'] = [
+        '#type' => 'select',
+        '#title' => t('Icon'),
+        '#weight' => -2,
+        '#options' => $options,
+        '#default_value' => $menu_link_icon,
+      ];
+
+      $form['actions']['submit']['#submit'][] = '_menu_svg_icons_menu_link_content_form_submit';
+    }
+  }
+}
+
+/**
+ * Submit function for menu link add / edit form.
+ */
+function _menu_svg_icons_menu_link_content_form_submit($form, FormStateInterface $form_state) {
+  $menu_link = $form_state->getFormObject()->getEntity();
+  $options = ['icon' => $form_state->getValue('icon')];
+  $menu_link_options = $menu_link->link->first()->options;
+
+  $menu_link->link->first()->options = array_merge($menu_link_options, $options);
+  $menu_link->save();
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function menu_svg_icons_preprocess_block(&$variables) {
+  if ($variables['base_plugin_id'] == 'system_menu_block') {
+
+    // Get the icon set based on the menu.
+    if ($icon_set_menu_conf = \Drupal::config('menu_svg_icons.icon_set_menu.' . $variables['derivative_plugin_id'])) {
+      if ($icon_set = \Drupal::config('menu_svg_icons.icon_set.' . $icon_set_menu_conf->get('icon_set'))) {
+        $variables['#attached']['library'][] = 'menu_svg_icons/menu-svg-icons';
+
+        // Inject the svg code to be used in this menu.
+        $variables['title_suffix']['svg'] = [
+          '#type' => 'inline_template',
+          '#template' => '<div style="display:none">' . $icon_set->get('source') . '</div>',
+        ];
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function menu_svg_icons_preprocess_menu(&$variables) {
+  if ($icon_set_menu_conf = \Drupal::config('menu_svg_icons.icon_set_menu.' . $variables['menu_name'])) {
+    $icon_set = \Drupal::config('menu_svg_icons.icon_set.' . $icon_set_menu_conf->get('icon_set'));
+    if ($icon_set) {
+      foreach ($variables['items'] as $key => $item) {
+        $item_title = $item['title'];
+        $variables['items'][$key]['title'] = [
+          '#theme' => 'menu_svg_icons_link',
+          '#title' => $item_title,
+          '#icon' => $item['url']->getOption('icon') == 'no_icon' ? NULL : $item['url']->getOption('icon'),
+          '#icon_height' => $icon_set->get('icon_width') ? 'height: ' . $icon_set->get('icon_width') . 'px;' : '',
+          '#icon_width' => $icon_set->get('icon_height') ? ' width: ' . $icon_set->get('icon_height') . 'px;' : '',
+          '#placement' => $icon_set->get('placement'),
+        ];
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function menu_svg_icons_theme() {
+  return [
+    'menu_svg_icons_link' => [
+      'variables' => [
+        'title' => NULL,
+        'icon' => NULL,
+        'icon_height' => NULL,
+        'icon_width' => NULL,
+        'placement' => NULL,
+      ],
+    ],
+  ];
+}

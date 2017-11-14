@@ -1,0 +1,28 @@
+name: Heriot
+description: this is the heriot theme
+type: theme
+core: 8.x
+base theme: false
+
+regions:
+  header: 'Header'
+  sidebar_first: 'Sidebar First'
+  sidebar_second: 'Sidebar Second'
+  header_top: 'Header Top'
+  content: 'Content'
+  footer: 'Footer'
+  home_menu: 'Home Menu'
+  global_search: 'Global Search'
+  upcoming_research: 'Upcoming Research'
+  footer_first: 'Footer First'
+  footer_second: 'Footer Second'
+  footer_third: 'Footer Third'
+  footer_forth: 'Footer_Forth'
+  sort_by: 'Sort By'
+  login: 'Login'
+  footer_bottom: 'Footer Bottom'
+  sidebar_first: 'Primary'
+  sidebar_second: 'Secondary'
+  
+libraries:
+  - heriot/global-styling  

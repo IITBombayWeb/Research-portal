@@ -100,8 +100,7 @@
 {# Main #}
 {% block main %}
   <div role="main" class="main-container {{ container }} js-quickedit-main-content">
-    <div class="row">
-
+    
       {# Header #}
       {% if page.header %}
         {% block header %}
@@ -111,11 +110,37 @@
         {% endblock %}
       {% endif %}
 
+   {# search #}
+<search class="search {{ container }}" role="contentinfo">
+    <div class="row">
+        <div class="col-md-12">
+        {{ page.welcome }}
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        {{ page.search }}  
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-md-10">
+        {{ page.content_type_first }}
+      </div>
+   </div>
+    
+</search>
+
+
+
+
+
+
+
       {# Sidebar First #}
       {% if page.sidebar_first %}
         {% block sidebar_first %}
           <aside class="col-sm-3" role="complementary">
-            {{ page.sidebar_first }}
+            {# {{ page.sidebar_first }} #}
           </aside>
         {% endblock %}
       {% endif %}
@@ -134,7 +159,8 @@
         {# Highlighted #}
         {% if page.highlighted %}
           {% block highlighted %}
-            <div class="highlighted">{{ page.highlighted }}</div>
+            <div class="highlighted">
+              {# {{ page.highlighted }}</div> #}
           {% endblock %}
         {% endif %}
 
@@ -155,7 +181,7 @@
         {# Help #}
         {% if page.help %}
           {% block help %}
-            {{ page.help }}
+            {# {{ page.help }} #}
           {% endblock %}
         {% endif %}
 
@@ -170,7 +196,7 @@
       {% if page.sidebar_second %}
         {% block sidebar_second %}
           <aside class="col-sm-3" role="complementary">
-            {{ page.sidebar_second }}
+            {# {{ page.sidebar_second }} #}
           </aside>
         {% endblock %}
       {% endif %}
@@ -181,7 +207,21 @@
 {% if page.footer %}
   {% block footer %}
     <footer class="footer {{ container }}" role="contentinfo">
-      {{ page.footer }}
+     <div class="row">
+      <div class="col-md-4">
+        {{ page.footer_first }}
+      </div>
+
+      <div class="col-md-4">
+        {{ page.footer_second }}
+      </div>
+
+      <div class="col-md-4">
+        {{ page.footer_third }}
+      </div>
+
+    </div>
+
     </footer>
   {% endblock %}
 {% endif %}

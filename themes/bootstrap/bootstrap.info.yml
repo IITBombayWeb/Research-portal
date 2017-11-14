@@ -18,7 +18,14 @@ regions:
   footer: 'Footer'
   page_top: 'Page top'
   page_bottom: 'Page bottom'
-
+  footer_first: 'Footer First'
+  footer_second: 'Footer Second'
+  footer_third: 'Footer Third'
+  welcome: 'welcome'
+  search: 'Search'
+  content_type_first: 'Content Type First'
+  
+  
 libraries:
   - 'bootstrap/theme'
 

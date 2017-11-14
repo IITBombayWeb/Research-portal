@@ -1,0 +1,110 @@
+{# <a href="#page-content" class="sr-only sr-only-focusable">Skip to main content</a>
+#}
+<div class="container-fluid global_no_padding">
+  <header id="page-header" class="col-md-12">
+    <div class="row">
+      <div class="col-md-9">
+        {{ page.header }} 
+      </div>
+      <div class="col-md-3">
+       {{ page.login }}
+     </div>
+   </div>
+ </header>
+</div>
+<main id="page-content" role="main">
+  <div class="page-section page-section-home page-section-home-index">
+    <div class="page-section-header page-section-header-home page-section-header-home-index" data-stickyheader="">
+     
+      <div class="container">
+        <section>
+          <header>
+            <h1 class="title" style="text-align:center;">
+              Welcome To IIT Bombay
+            </h1>
+          </header>
+          <div class="center" style="margin: auto;width: 90%;">
+           <div class="container">
+            <div class="row"> 
+            {#  <div class="col-md-2">
+              {{ page.sort_by }}
+            </div> #}
+            <div class="col-md-12">
+              {{ page.global_search }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="container">
+      <div class="navbar-header">
+        <ul class="nav navbar-nav">
+          {{ page.home_menu}} 
+        </ul>
+      </div>
+    </div> 
+  </div>
+</div>
+</div> 
+</div> 
+<div class="container">
+  <div class="row">
+    <aside class="col-sm-3" role="complementary">
+      {{ page.sidebar_first }}
+    </aside>
+    <div class="col-md-6">
+      <div class="page-section welcome">
+        {{ page.content }}
+      </div> 
+    </div>
+    <aside class="col-sm-3" role="complementary">
+      {{ page.sidebar_second }} 
+    </aside>
+  </div>
+</div>
+</div> 
+<hr> 
+ <div class="container">
+ <div class="col-md-12">
+  <div class="page-section network-collaborations">  
+    {{ page.upcoming_research}}  
+
+  </div>
+</div>
+</div> 
+
+</main>
+
+<footer id="page-footer">
+  <div class="container">
+    <div class="footer-wrapper">
+     <nav class="content-navigation " role="navigation">
+      <div class="row">
+        <div class="col-md-3">
+          {{ page.footer_first }}
+        </div>
+        <div class="col-md-3">
+          {{ page.footer_second }}
+        </div>
+        <div class="col-md-3">
+          {{ page.footer_third }}
+        </div>
+        <div class="col-md-3">
+          {{ page.footer_forth }}
+        </div>
+      </div>
+    </nav>
+  </div>
+  {# <div class="copywrite">
+   <div class="container">
+     {{ page.footer_bottom }} 
+
+
+   </div>
+ </div>  #}
+</div>
+</footer> 
+</div>
+<div id="back-to-top">
+  <a href="javascript://"><i class="icon icon-up-open"></i></a>
+</div>

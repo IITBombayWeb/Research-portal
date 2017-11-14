@@ -1,0 +1,17 @@
+global-styling:
+  version: VERSION
+  css:
+    theme:
+      css/style.css: {}
+      css/stylesheet.css: {}
+      css/tether.css: {}
+      vendor/bootstrap/css/bootstrap.min.css: {}
+      css/custom.css: {}
+      
+  js:
+    # js/jquery.min.js: {}
+    js/tether.min.js: {} 
+    vendor/bootstrap/js/bootstrap.min.js: {} 
+    js/custom.js: {}
+  dependencies:
+    - core/jquery  
